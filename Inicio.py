@@ -317,6 +317,34 @@ if st.sidebar.button("Cerrar sesión"):
     st.session_state.agent_access_key = ""
     st.rerun()
 
+# Función para verificar si hay URLs de imagen en la respuesta
+def extract_and_process_images(text):
+    import re
+    # Patrón específico para URLs de gráficos de tu sistema
+    chart_pattern = r'https?://[^\s\)\]\}]+/chart\?[^\s\)\]\}]+'
+    
+    # Patrones adicionales para otros tipos de imágenes
+    image_patterns = [
+        chart_pattern,  # URLs de gráficos de tu sistema
+        r'https?://[^\s\)\]\}]+\.(?:jpg|jpeg|png|gif|webp|svg)',
+        r'https?://[^\s\)\]\}]+\.(?:JPG|JPEG|PNG|GIF|WEBP|SVG)',
+        r'data:image/[^;]+;base64,[^\s]+'
+    ]
+    
+    images_found = []
+    for pattern in image_patterns:
+        images_found.extend(re.findall(pattern, text))
+    
+    # Eliminar duplicados manteniendo el orden
+    images_found = list(dict.fromkeys(images_found))
+    
+    # Simplificar el texto removiendo las URLs de imágenes
+    simplified_text = text
+    for img_url in images_found:
+        simplified_text = simplified_text.replace(img_url, '\n[Imagen mostrada abajo]\n')
+    
+    return simplified_text, images_found
+
 # Función para enviar consulta al agente
 def query_agent(prompt, history=None):
     try:
@@ -396,7 +424,25 @@ def query_agent(prompt, history=None):
 # Mostrar historial de conversación
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
-        st.markdown(message["content"])
+        # Procesar mensajes del historial para extraer imágenes
+        if message["role"] == "assistant":
+            content = message["content"]
+            simplified_text, image_urls = extract_and_process_images(content)
+            st.markdown(simplified_text)
+            
+            # Mostrar imágenes del historial
+            if image_urls:
+                for idx, img_url in enumerate(image_urls):
+                    try:
+                        if '/chart?' in img_url:
+                            st.image(img_url, caption=f"Gráfico de energía", use_column_width=True)
+                        else:
+                            st.image(img_url, caption=f"Imagen {idx + 1}", use_column_width=True)
+                    except:
+                        st.markdown(f"[Ver imagen]({img_url})")
+        else:
+            st.markdown(message["content"])
+        
         # Si es un mensaje del asistente y tiene audio asociado, mostrarlo
         if message["role"] == "assistant" and "audio_html" in message:
             st.markdown(message["audio_html"], unsafe_allow_html=True)
@@ -434,12 +480,37 @@ if prompt:
             else:
                 # Mostrar respuesta del asistente
                 response_text = response.get("response", "No se recibió respuesta del agente.")
-                st.markdown(response_text)
+                
+                # Procesar la respuesta para extraer imágenes
+                simplified_text, image_urls = extract_and_process_images(response_text)
+                
+                # Mostrar el texto simplificado
+                st.markdown(simplified_text)
+                
+                # Mostrar las imágenes encontradas
+                if image_urls:
+                    for idx, img_url in enumerate(image_urls):
+                        try:
+                            # Detectar si es una URL de gráfico
+                            if '/chart?' in img_url:
+                                st.markdown(f"**Gráfico de datos #{idx + 1}**")
+                                st.image(img_url, caption=f"Gráfico de energía", use_column_width=True)
+                                # Agregar parámetros adicionales si el servidor lo requiere
+                                st.markdown(f"[Ver gráfico en nueva pestaña]({img_url})")
+                            else:
+                                st.markdown(f"**Imagen #{idx + 1}**")
+                                st.image(img_url, caption=f"Imagen {idx + 1}", use_column_width=True)
+                                st.markdown(f"[Abrir en nueva pestaña]({img_url})")
+                        except Exception as e:
+                            st.error(f"No se pudo cargar la imagen {idx + 1}: {str(e)}")
+                            # Mostrar URL como fallback con opción de clic
+                            st.markdown(f"**Imagen no disponible. [Haz clic aquí para verla]({img_url})**")
+                            st.code(img_url)
                 
                 # Generar audio (siempre)
                 audio_html = None
                 with st.spinner("Generando audio..."):
-                    audio_html = text_to_speech(response_text)
+                    audio_html = text_to_speech(simplified_text)
                     st.markdown(audio_html, unsafe_allow_html=True)
                 
                 # Añadir respuesta al historial con el audio

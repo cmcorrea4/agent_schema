@@ -91,7 +91,7 @@ def initialize_session_vars():
         st.session_state.is_configured = False
     if "agent_endpoint" not in st.session_state:
         # Endpoint fijo como solicitado
-        st.session_state.agent_endpoint = "https://vs3sawqsrcx6yzud3roifshn.agents.do-ai.run"
+        st.session_state.agent_endpoint = "https://z4rbf27rqwp3tthn2u4vlugj.agents.do-ai.run"
     if "agent_access_key" not in st.session_state:
         st.session_state.agent_access_key = ""
     if "messages" not in st.session_state:

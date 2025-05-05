@@ -164,7 +164,7 @@ st.markdown("""
     </p>
     <ul style="list-style-type: none; padding-left: 0; margin-bottom: 1.5rem; font-family: 'Segoe UI', Arial, sans-serif;">
         <li style="margin-bottom: 0.8rem; padding: 0.5rem 0.8rem; background-color: rgba(30, 136, 229, 0.1); border-radius: 4px; border-left: 3px solid #FF9800;">
-            <span style="font-weight: 500; color: #BBDEFB;">¿Puedes darme el consumo de Energía de las últimas 2 horas y su coste correspondiente?</span>
+            <span style="font-weight: 500; color: #BBDEFB;">¿Qué servicios presta SUME EnergyC en lo referente a Inteligencia artificial e Internet de las cosas?</span>
         </li>
         <li style="margin-bottom: 0.8rem; padding: 0.5rem 0.8rem; background-color: rgba(30, 136, 229, 0.1); border-radius: 4px; border-left: 3px solid #FF9800;">
             <span style="font-weight: 500; color: #BBDEFB;">¿Qué patrones de demanda de energía se han dado en la última hora?</span>
@@ -173,7 +173,7 @@ st.markdown("""
             <span style="font-weight: 500; color: #BBDEFB;">¿Puedes darme el gráfico de demanda de energía de las últimas 3 horas?</span>
         </li>
         <li style="margin-bottom: 0.8rem; padding: 0.5rem 0.8rem; background-color: rgba(30, 136, 229, 0.1); border-radius: 4px; border-left: 3px solid #FF9800;">
-            <span style="font-weight: 500; color: #BBDEFB;">¿Qué servicios presta SUME EnergyC en lo referente a Inteligencia artificial e Internet de las cosas?</span>
+            <span style="font-weight: 500; color: #BBDEFB;">¿Puedes darme el consumo de Energía de las últimas 2 horas y su coste correspondiente?</span>
         </li>
     </ul>
 </div>

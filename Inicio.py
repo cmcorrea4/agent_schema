@@ -88,7 +88,7 @@ def initialize_session_vars():
         st.session_state.is_configured = False
     if "agent_endpoint" not in st.session_state:
         # Endpoint fijo como solicitado
-        st.session_state.agent_endpoint = "https://z4rbf27rqwp3tthn2u4vlugj.agents.do-ai.run"
+        st.session_state.agent_endpoint = "https://vs3sawqsrcx6yzud3roifshn.agents.do-ai.run"
     if "agent_access_key" not in st.session_state:
         st.session_state.agent_access_key = ""
     if "messages" not in st.session_state:
@@ -430,13 +430,10 @@ for message in st.session_state.messages:
             simplified_text, image_urls = extract_and_process_images(content)
             st.markdown(simplified_text)
             
-            # Mostrar imágenes del historial
+            # Mostrar solo enlaces para imágenes del historial
             if image_urls:
                 for idx, img_url in enumerate(image_urls):
-                    try:
-                        st.image(img_url, use_container_width=True)
-                    except:
-                        st.markdown(f"[Ver gráfico en pestaña nueva]({img_url})")
+                    st.markdown(f"[Ver gráfico en pestaña nueva]({img_url})")
         else:
             st.markdown(message["content"])
         
@@ -487,16 +484,11 @@ if prompt:
                 # Mostrar las imágenes encontradas
                 if image_urls:
                     for idx, img_url in enumerate(image_urls):
-                        try:
-                            # Detectar si es una URL de gráfico
-                            if '/chart?' in img_url:
-                                st.image(img_url, use_container_width=True)
-                                st.markdown(f"[Ver gráfico en pestaña nueva]({img_url})")
-                            else:
-                                st.image(img_url, use_container_width=True)
-                                st.markdown(f"[Abrir en nueva pestaña]({img_url})")
-                        except Exception as e:
+                        # Solo mostrar el enlace, sin intentar mostrar la imagen
+                        if '/chart?' in img_url:
                             st.markdown(f"[Ver gráfico en pestaña nueva]({img_url})")
+                        else:
+                            st.markdown(f"[Abrir en nueva pestaña]({img_url})")
                 
                 # Generar audio (siempre)
                 audio_html = None

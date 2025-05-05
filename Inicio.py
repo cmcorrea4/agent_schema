@@ -496,7 +496,6 @@ if prompt:
                                 st.image(img_url, use_container_width=True)
                                 st.markdown(f"[Abrir en nueva pestaña]({img_url})")
                         except Exception as e:
-                            st.error(f"No se pudo cargar la imagen: {str(e)}")
                             st.markdown(f"[Ver gráfico en pestaña nueva]({img_url})")
                 
                 # Generar audio (siempre)

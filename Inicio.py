@@ -39,10 +39,7 @@ st.markdown("""
         background-color: #262730;
         color: white;
     }
-    div.stButton > button:first-child {
-        background-color: #FF9800;
-        color: white;
-    }
+
     .css-1d391kg, .css-12oz5g7 {
         background-color: #262730;
     }
@@ -91,7 +88,7 @@ def initialize_session_vars():
         st.session_state.is_configured = False
     if "agent_endpoint" not in st.session_state:
         # Endpoint fijo como solicitado
-        st.session_state.agent_endpoint = "https://z4rbf27rqwp3tthn2u4vlugj.agents.do-ai.run"
+        st.session_state.agent_endpoint = "https://vs3sawqsrcx6yzud3roifshn.agents.do-ai.run"
     if "agent_access_key" not in st.session_state:
         st.session_state.agent_access_key = ""
     if "messages" not in st.session_state:
@@ -162,18 +159,18 @@ st.markdown("<p class='subheader'>Interactúa con tu asistente.</p>", unsafe_all
 # Agregar ejemplos de preguntas con estilo profesional
 st.markdown("""
 <div class="example-questions">
-    <p style="font-size: 0.9rem; color: #FFCC80; margin-bottom: 1.5rem; font-style: italic; font-family: 'Segoe UI', Arial, sans-serif;">
+    <p style="font-size: 0.9rem; color: #8EBBFF; margin-bottom: 1.5rem; font-style: italic; font-family: 'Segoe UI', Arial, sans-serif;">
         Ejemplos de preguntas que puedes hacerle:
     </p>
     <ul style="list-style-type: none; padding-left: 0; margin-bottom: 1.5rem; font-family: 'Segoe UI', Arial, sans-serif;">
-        <li style="margin-bottom: 0.8rem; padding: 0.5rem 0.8rem; background-color: rgba(255, 152, 0, 0.1); border-radius: 4px; border-left: 3px solid #FF9800;">
-            <span style="font-weight: 500; color: #FFB74D;">¿Puedes darme el consumo de Energía de las últimas 2 horas y su coste correspondiente?</span>
+        <li style="margin-bottom: 0.8rem; padding: 0.5rem 0.8rem; background-color: rgba(30, 136, 229, 0.1); border-radius: 4px; border-left: 3px solid #FF9800;">
+            <span style="font-weight: 500; color: #BBDEFB;">¿Puedes darme el consumo de Energía de las últimas 2 horas y su coste correspondiente?</span>
         </li>
-        <li style="margin-bottom: 0.8rem; padding: 0.5rem 0.8rem; background-color: rgba(255, 152, 0, 0.1); border-radius: 4px; border-left: 3px solid #FF9800;">
-            <span style="font-weight: 500; color: #FFB74D;">¿Qué patrones de demanda de energía se han dado en la última hora?</span>
+        <li style="margin-bottom: 0.8rem; padding: 0.5rem 0.8rem; background-color: rgba(30, 136, 229, 0.1); border-radius: 4px; border-left: 3px solid #FF9800;">
+            <span style="font-weight: 500; color: #BBDEFB;">¿Qué patrones de demanda de energía se han dado en la última hora?</span>
         </li>
-        <li style="margin-bottom: 0.8rem; padding: 0.5rem 0.8rem; background-color: rgba(255, 152, 0, 0.1); border-radius: 4px; border-left: 3px solid #FF9800;">
-            <span style="font-weight: 500; color: #FFB74D;">¿Puedes darme el gráfico de demanda de energía de las últimas 3 horas?</span>
+        <li style="margin-bottom: 0.8rem; padding: 0.5rem 0.8rem; background-color: rgba(30, 136, 229, 0.1); border-radius: 4px; border-left: 3px solid #FF9800;">
+            <span style="font-weight: 500; color: #BBDEFB;">¿Puedes darme el gráfico de demanda de energía de las últimas 3 horas?</span>
         </li>
     </ul>
 </div>

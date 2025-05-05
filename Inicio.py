@@ -88,7 +88,7 @@ def initialize_session_vars():
         st.session_state.is_configured = False
     if "agent_endpoint" not in st.session_state:
         # Endpoint fijo como solicitado
-        st.session_state.agent_endpoint = "https://z4rbf27rqwp3tthn2u4vlugj.agents.do-ai.run"
+        st.session_state.agent_endpoint = "https://vs3sawqsrcx6yzud3roifshn.agents.do-ai.run"
     if "agent_access_key" not in st.session_state:
         st.session_state.agent_access_key = ""
     if "messages" not in st.session_state:
@@ -435,9 +435,9 @@ for message in st.session_state.messages:
                 for idx, img_url in enumerate(image_urls):
                     try:
                         if '/chart?' in img_url:
-                            st.image(img_url, caption=f"Gráfico de energía", use_column_width=True)
+                            st.image(img_url, caption=f"Gráfico de energía", use_container_width=True)
                         else:
-                            st.image(img_url, caption=f"Imagen {idx + 1}", use_column_width=True)
+                            st.image(img_url, caption=f"Imagen {idx + 1}", use_container_width=True)
                     except:
                         st.markdown(f"[Ver imagen]({img_url})")
         else:
@@ -494,12 +494,12 @@ if prompt:
                             # Detectar si es una URL de gráfico
                             if '/chart?' in img_url:
                                 st.markdown(f"**Gráfico de datos #{idx + 1}**")
-                                st.image(img_url, caption=f"Gráfico de energía", use_column_width=True)
+                                st.image(img_url, caption=f"Gráfico de energía", use_container_width=True)
                                 # Agregar parámetros adicionales si el servidor lo requiere
                                 st.markdown(f"[Ver gráfico en nueva pestaña]({img_url})")
                             else:
                                 st.markdown(f"**Imagen #{idx + 1}**")
-                                st.image(img_url, caption=f"Imagen {idx + 1}", use_column_width=True)
+                                st.image(img_url, caption=f"Imagen {idx + 1}", use_container_width=True)
                                 st.markdown(f"[Abrir en nueva pestaña]({img_url})")
                         except Exception as e:
                             st.error(f"No se pudo cargar la imagen {idx + 1}: {str(e)}")

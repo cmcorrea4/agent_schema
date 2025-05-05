@@ -170,7 +170,7 @@ st.markdown("""
             <span style="font-weight: 500; color: #BBDEFB;">¿Qué patrones de demanda de energía se han dado en la última hora?</span>
         </li>
         <li style="margin-bottom: 0.8rem; padding: 0.5rem 0.8rem; background-color: rgba(30, 136, 229, 0.1); border-radius: 4px; border-left: 3px solid #FF9800;">
-            <span style="font-weight: 500; color: #BBDEFB;">¿Puedes darme el gráfico de demanda de energía de las últimas 3 horas?</span>
+            <span style="font-weight: 500; color: #BBDEFB;">¿Puedes darme el gráfico de demanda de energía de la última hora?</span>
         </li>
     </ul>
 </div>
@@ -341,7 +341,7 @@ def extract_and_process_images(text):
     # Simplificar el texto removiendo las URLs de imágenes
     simplified_text = text
     for img_url in images_found:
-        simplified_text = simplified_text.replace(img_url, '\n[Imagen mostrada abajo]\n')
+        simplified_text = simplified_text.replace(img_url)
     
     return simplified_text, images_found
 
@@ -458,7 +458,7 @@ if prompt:
     
     # Mostrar indicador de carga mientras se procesa
     with st.chat_message("assistant"):
-        with st.spinner("Pensando..."):
+        with st.spinner("Buscando..."):
             # Enviar consulta al agente
             response = query_agent(prompt, api_history)
             
@@ -486,7 +486,7 @@ if prompt:
                     for idx, img_url in enumerate(image_urls):
                         # Solo mostrar el enlace, sin intentar mostrar la imagen
                         if '/chart?' in img_url:
-                            st.markdown(f"[Ver gráfico en pestaña nueva]({img_url})")
+                            st.markdown(f"[Ver gráfico]({img_url})")
                         else:
                             st.markdown(f"[Abrir en nueva pestaña]({img_url})")
                 

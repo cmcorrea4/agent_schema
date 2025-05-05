@@ -341,7 +341,7 @@ def extract_and_process_images(text):
     # Simplificar el texto removiendo las URLs de imágenes
     simplified_text = text
     for img_url in images_found:
-        simplified_text = simplified_text.replace(img_url)
+        simplified_text = simplified_text.replace(img_url,' ')
     
     return simplified_text, images_found
 
